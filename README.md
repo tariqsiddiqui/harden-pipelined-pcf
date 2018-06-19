@@ -17,6 +17,12 @@ additional parameters are required.
 
 * Currently supports only AWS.
 
+# To Do
+
+1. Assure that Cloud Controller and BOSH director have appropriate S3 access
+1. Test further
+1. Add BOSH disk encryption (likely as another task)
+
 # Warning
 
 *I quickly extracted this from my [bootstrap](https://github.com/crdant/bootstrap) repository and applied minimal testing.
