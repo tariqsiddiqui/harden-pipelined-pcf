@@ -5,7 +5,7 @@
     name: harden-pipelined-pcf
     type: git
     source:
-      uri: https://github.com/crdant/harden-pipelined-pcf.git
+      uri: https://github.com/tariqsiddiqui/harden-pipelined-pcf.git
       branch: gcp-plan-patches
 
 ### Use the bootstrap code when creating the infrastructure
