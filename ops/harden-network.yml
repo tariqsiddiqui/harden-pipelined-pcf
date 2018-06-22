@@ -5,23 +5,17 @@
     name: harden-pipelined-pcf
     type: git
     source:
-      uri: https://github.com/crdant/harden-pipelined-pcf.git
+      uri: https://github.com/tariqsiddiqui/harden-pipelined-pcf.git
       branch: gcp-plan-patches
 
 ### Use the bootstrap code when creating the infrastructure
 - op: replace
-  path: /jobs/name=create-infrastructure/plan/0/aggregate/0/do/get=pcf-pipelines-tarball
+  path: /jobs/name=create-infrastructure/plan/0/aggregate/0/get=pcf-pipelines
   value:
     do:
     - get: harden-pipelined-pcf
-    - get: pcf-pipelines-tarball
+    - get: pcf-pipelines
 
-### rename the pcf-pipelines output for input to hardening
-- op: replace
-  path: /jobs/name=create-infrastructure/plan/0/aggregate/0/do/task=unpack-tarball/config/outputs/name=pcf-pipelines
-  value:
-    name: pcf-pipelines-base
-    path: pcf-pipelines
 
 ### add a task to include the hardening terraform templates
 - op: add
@@ -32,3 +26,9 @@
     params:
       iaas: ((iaas))
       region: ((aws_region))
+
+- op: add
+  path: /jobs/name=configure-director/plan/-
+  value:
+    task: encrypt-ebs
+    file: harden-pipelined-pcf/tasks/harden-network/aws/encrypt-ebs.yml

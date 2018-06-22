@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: pcfnorm/rootfs
+inputs:
+  - name: pcf-pipelines
+  - name: terraform-state
+params:
+  OPSMAN_DOMAIN_OR_IP_ADDRESS:
+  OPSMAN_USER:
+  OPSMAN_PASSWORD:
+run:
+  path: harden-pipelines.pcf/tasks/hardent-network/aws/encrypt-ebs.sh
